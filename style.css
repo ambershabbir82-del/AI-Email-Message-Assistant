@@ -1,0 +1,168 @@
+:root {
+  --ink: #17233a;
+  --ink-soft: #52607a;
+  --paper: #f4f6fa;
+  --card: #ffffff;
+  --line: #d8dfeb;
+  --accent: #0e7c86;
+  --accent-dark: #0a5f67;
+  --danger-bg: #fdecec;
+  --danger: #a12626;
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  line-height: 1.55;
+}
+
+.hero {
+  background: var(--ink);
+  color: #fff;
+  text-align: center;
+  padding: 44px 20px 56px;
+}
+.hero h1 {
+  margin: 14px 0 8px;
+  font-size: clamp(1.5rem, 4.5vw, 2.4rem);
+  letter-spacing: .02em;
+  line-height: 1.2;
+}
+.hero p { margin: 0 auto; max-width: 520px; color: #c9d3e6; font-size: 1.05rem; }
+
+.badge {
+  display: inline-block;
+  padding: 4px 14px;
+  border: 1px solid #4d6ba0;
+  border-radius: 999px;
+  font-size: .85rem;
+  color: #dbe6ff;
+}
+
+.layout {
+  max-width: 1100px;
+  margin: -24px auto 40px;
+  padding: 0 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.card h2 { margin: 0 0 8px; font-size: 1.2rem; }
+
+label, legend { font-weight: 600; font-size: .95rem; margin-top: 8px; }
+
+select, textarea {
+  width: 100%;
+  font: inherit;
+  padding: 11px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+}
+textarea { resize: vertical; min-height: 160px; }
+select:focus, textarea:focus, .btn:focus-visible, .tone-option input:focus-visible + span {
+  outline: 3px solid rgba(14, 124, 134, .35);
+  outline-offset: 1px;
+  border-color: var(--accent);
+}
+
+.tones { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.tones legend { padding: 0; width: 100%; margin-bottom: 6px; }
+.tone-option { margin: 0; font-weight: 500; position: relative; }
+.tone-option input { position: absolute; opacity: 0; }
+.tone-option span {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.tone-option input:checked + span {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.btn {
+  font: inherit;
+  font-weight: 600;
+  padding: 10px 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+  cursor: pointer;
+}
+.btn:hover:not(:disabled) { background: #eef2f8; }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+.btn.primary {
+  margin-top: 10px;
+  padding: 14px 18px;
+  font-size: 1.05rem;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.btn.primary:hover:not(:disabled) { background: var(--accent-dark); }
+.btn.ghost { color: var(--ink-soft); }
+
+.error {
+  background: var(--danger-bg);
+  color: var(--danger);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: .95rem;
+}
+
+.empty { color: var(--ink-soft); padding: 30px 0; text-align: center; border: 1px dashed var(--line); border-radius: 10px; }
+
+.loading { display: flex; align-items: center; gap: 12px; padding: 30px 0; justify-content: center; color: var(--ink-soft); }
+.spinner {
+  width: 22px; height: 22px;
+  border: 3px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.result {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 16px;
+  max-height: 420px;
+  overflow-y: auto;
+}
+.subject { margin: 0 0 12px; font-weight: 700; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+.result-body { white-space: pre-wrap; max-width: 70ch; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 12px; }
+
+[hidden] { display: none !important; }
+
+@media (max-width: 800px) {
+  .layout { grid-template-columns: 1fr; }
+  .card { padding: 18px; }
+  .actions .btn { flex: 1 1 calc(50% - 8px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner { animation-duration: 2s; }
+}

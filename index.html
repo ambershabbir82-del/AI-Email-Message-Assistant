@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Email &amp; Message Assistant</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="hero">
+    <span class="badge">Powered by Groq AI</span>
+    <h1>AI EMAIL &amp; MESSAGE ASSISTANT</h1>
+    <p>Transform your rough text into clear, professional messages with AI.</p>
+  </header>
+
+  <main class="layout">
+    <section class="card" aria-labelledby="input-title">
+      <h2 id="input-title">Your message</h2>
+
+      <label for="message-type">Message type</label>
+      <select id="message-type">
+        {% for t in message_types %}<option value="{{ t }}">{{ t }}</option>{% endfor %}
+      </select>
+
+      <fieldset class="tones">
+        <legend>Writing tone</legend>
+        {% for t in tones %}
+        <label class="tone-option">
+          <input type="radio" name="tone" value="{{ t }}" {% if loop.first %}checked{% endif %}>
+          <span>{{ t }}</span>
+        </label>
+        {% endfor %}
+      </fieldset>
+
+      <label for="message">Enter your rough message</label>
+      <textarea id="message" rows="8" maxlength="3000" placeholder="Type or paste your rough message here..."></textarea>
+
+      <div id="input-error" class="error" role="alert" hidden></div>
+
+      <button id="generate-btn" class="btn primary" type="button">Generate with AI</button>
+    </section>
+
+    <section class="card output" aria-labelledby="output-title" aria-live="polite">
+      <h2 id="output-title">AI generated message</h2>
+
+      <div id="placeholder" class="empty">Your improved message will appear here.</div>
+
+      <div id="loading" class="loading" hidden>
+        <span class="spinner" aria-hidden="true"></span>
+        <span>Generating your message...</span>
+      </div>
+
+      <div id="output-error" class="error" role="alert" hidden></div>
+
+      <div id="result" class="result" hidden>
+        <p id="subject" class="subject" hidden></p>
+        <div id="result-body" class="result-body"></div>
+      </div>
+
+      <div class="actions">
+        <button id="copy-btn" class="btn" type="button" disabled>Copy Message</button>
+        <button id="download-btn" class="btn" type="button" disabled>Download Message</button>
+        <button id="regenerate-btn" class="btn" type="button" disabled>Regenerate</button>
+        <button id="clear-btn" class="btn ghost" type="button">Clear</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
